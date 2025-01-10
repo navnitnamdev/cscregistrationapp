@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:http_parser/http_parser.dart';
 import '../common/CommonText.dart';
-import '../customwidgets/CustomToast.dart';
+import '../customwidgets/CustomHelper.dart';
 
 class Apiservice {
   static var resMsg;
@@ -116,11 +116,11 @@ class Apiservice {
     } on SocketException {
       Navigator.pop(context);
 
-      CustomToast.showToast(context, Commontext.SERVERCONNECTION);
+      CustomHelper.showToast(context, Commontext.SERVERCONNECTION);
     } on TimeoutException {
       Navigator.pop(context);
 
-      CustomToast.showToast(context, Commontext.timeout);
+      CustomHelper.showToast(context, Commontext.timeout);
     } catch (e) {}
   }
 

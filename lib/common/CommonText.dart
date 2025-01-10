@@ -81,4 +81,7 @@ class Commontext {
   static String timeout= "Time Out Please Try Again";
   static String areyousure= "Are you sure want to exit?";
   static String devmodedesc= "The device is set to Developer Mode, which may expose your device to security risks";
+  static String exitapp= "Exit Application";
+  static String yes= "Yes";
+  static String no= "No";
    }

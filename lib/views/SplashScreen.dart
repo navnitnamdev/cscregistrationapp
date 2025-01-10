@@ -2,17 +2,13 @@ import 'dart:async';
 import 'package:cscapp/common/AppImagesPath.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-/*
-import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
-*/
+
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import '../common/CommonText.dart';
-import '../common/DeveloperMode.dart';
-import '../common/TextStyle.dart';
+ import '../common/TextStyle.dart';
 import 'package:get/get.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+
 import 'SignUpButton.dart';
 
 class SplashScreen extends StatefulWidget {

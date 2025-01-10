@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cscapp/customwidgets/CustomHelper.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:cscapp/CommonBaseUrl/Apiservice.dart';
 import 'package:cscapp/common/CommonAppColor.dart';
@@ -10,8 +11,7 @@ import '../common/AppImagesPath.dart';
 import '../common/CommonText.dart';
 import '../common/TextStyle.dart';
 import '../customwidgets/CustomDialogBox.dart';
-import '../customwidgets/CustomDivider.dart';
-import '../customwidgets/CustomElevatedButton.dart';
+ import '../customwidgets/CustomElevatedButton.dart';
 import '../customwidgets/SpaceBox.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -223,7 +223,13 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                         Text(box.read("apprefnumber").toString()),
                       ],
                     ),
-                    const Customdivider(),
+
+                    CustomHelper.customDivider(
+                      color: Commonappcolor.grey,   // Divider color
+                      thickness: 1.0,       // Divider thickness
+                      indent: 0.0,         // Left indent
+                      endIndent: 0.0,      // Right indent
+                    ),
                     const SpaceBox(
                       height: 20,
                     ),
@@ -252,7 +258,13 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                         Text(box.read("securecode").toString()),
                       ],
                     ),
-                    const Customdivider(),
+                   // const Customdivider(),
+                    CustomHelper.customDivider(
+                      color: Commonappcolor.grey,   // Divider color
+                      thickness: 1.0,       // Divider thickness
+                      indent: 0.0,         // Left indent
+                      endIndent: 0.0,      // Right indent
+                    ),
                     const SpaceBox(
                       height: 20,
                     ),
@@ -282,7 +294,13 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                         Text(box.read("mobilenumber").toString()),
                       ],
                     ),
-                    const Customdivider(),
+                   // const Customdivider(),
+                    CustomHelper.customDivider(
+                      color: Commonappcolor.grey,   // Divider color
+                      thickness: 1.0,       // Divider thickness
+                      indent: 0.0,         // Left indent
+                      endIndent: 0.0,      // Right indent
+                    ),
                     const SpaceBox(
                       height: 10,
                     ),

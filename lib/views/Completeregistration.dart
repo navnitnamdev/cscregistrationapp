@@ -9,7 +9,7 @@ import '../common/AppImagesPath.dart';
 import '../common/CommonText.dart';
 import '../common/TextStyle.dart';
 import '../customwidgets/CustomElevatedButton.dart';
-import '../customwidgets/CustomToast.dart';
+import '../customwidgets/CustomHelper.dart';
 import '../customwidgets/SpaceBox.dart';
 import 'package:get_storage/get_storage.dart';
 import 'PreviousScreen.dart';
@@ -177,7 +177,17 @@ class _CompleteregistrationState extends State<Completeregistration> {
     return Scaffold(
         backgroundColor: Commonappcolor.white,
         body: WillPopScope(
-          onWillPop: showExitPopup,
+          onWillPop: () async{
+            return await CustomHelper.showExitPopup(
+              context: context,
+              title: Commontext.exitapp,
+              description: Commontext.areyousure,
+              yesText: Commontext.yes,
+              noText: Commontext.no,
+              titleBackgroundColor: Commonappcolor.blue,
+              buttonColor: Commonappcolor.blue,
+            );
+          },
           child: GestureDetector(
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
@@ -378,35 +388,35 @@ class _CompleteregistrationState extends State<Completeregistration> {
                                     validateAppRefNumber(apprefnumberinput);
 
                                     if (apprefnumberinput.isEmpty) {
-                                      CustomToast.showToast(context,
+                                      CustomHelper.showToast(context,
                                           Commontext.pleasefillapprefnumber);
                                     } else if (apprefnumberinput.length < 12) {
-                                      CustomToast.showToast(
+                                      CustomHelper.showToast(
                                           context,
                                           Commontext
                                               .pleasefillapprefnumberupto1216);
                                     } else if (securecodeinput.isEmpty) {
-                                      CustomToast.showToast(context,
+                                      CustomHelper.showToast(context,
                                           Commontext.pleasefillsecurecode);
                                     } else if (securecodeinput.length < 6) {
-                                      CustomToast.showToast(
+                                      CustomHelper.showToast(
                                           context,
                                           Commontext
                                               .pleasefillsecurecodesixdigit);
                                     } else if (mobnumberinput.isEmpty) {
-                                      CustomToast.showToast(
+                                      CustomHelper.showToast(
                                           context, Commontext.mobcannotbeempty);
                                     } else if (mobnumberinput.length < 10) {
-                                      CustomToast.showToast(context,
+                                      CustomHelper.showToast(context,
                                           Commontext.mobilenumbertendigit);
                                     } else if (!RegExp(r'^[6-9]\d{9}$')
                                         .hasMatch(mobnumberinput.toString())) {
-                                      CustomToast.showToast(
+                                      CustomHelper.showToast(
                                           context,
                                           Commontext
                                               .mobnumberstartabovesixdigit);
                                     } else if (mobnumberinput == "0000000000") {
-                                      CustomToast.showToast(context,
+                                      CustomHelper.showToast(context,
                                           Commontext.mobilenummberinvalid);
                                     } else {
                                       validateAndProceed(apprefnumberinput, securecodeinput, mobnumberinput);

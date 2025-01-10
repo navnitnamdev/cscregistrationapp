@@ -2,12 +2,15 @@ import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:cscapp/common/CommonAppColor.dart';
+import 'package:cscapp/customwidgets/CustomHelper.dart';
 import 'package:cscapp/customwidgets/SpaceBox.dart';
 import 'package:cscapp/views/NewRegInstruction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:root_checker_plus/root_checker_plus.dart';
 import '../common/CommonText.dart';
 import '../common/TextStyle.dart';
@@ -41,6 +44,8 @@ class _SignupState extends State<SignupButton> {
     }
     DateTime now = DateTime.now();
     formattedDate = DateFormat('yyyy').format(now);
+
+    clearAppCache();
     super.initState();
   }
 
@@ -68,12 +73,21 @@ class _SignupState extends State<SignupButton> {
     setState(() {
       devMode = devMode;
       print('Developer Mode: $devMode');
-      //  _showDeveloperModeAlert();
     });
 
     if (devMode) {
-      // Show an alert dialog when Developer Mode is enabled
-      _showDeveloperModeAlert();
+      CustomHelper.showCustomAlertDialogDeveloperMode(
+        context: context,
+        title: "CSC APP",
+        description: Commontext.devmodedesc,
+        onOkPressed: () {
+          AppSettings.openAppSettings(type: AppSettingsType.developer);
+        },
+        backgroundColor: Colors.white,
+        titleBackgroundColor: Colors.blue,
+        buttonColor: Colors.blue,
+        buttonTextColor: Colors.white,
+      );
     }
   }
 
@@ -88,86 +102,6 @@ class _SignupState extends State<SignupButton> {
     setState(() {
       jailbreak = jailbreak;
     });
-  }
-
-  void _showDeveloperModeAlert() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Commonappcolor.white,
-          titlePadding: const EdgeInsets.only(top: 0, left: 0, right: 00),
-          buttonPadding: const EdgeInsets.all(10),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(
-                5.0,
-              ),
-            ),
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 5),
-          title: Container(
-            color: Commonappcolor.blue,
-            child: const Center(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "CSC APP",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Commonappcolor.white),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        Commontext.devmodedesc,
-                        style: Stylefile.Textcolor_black_16_heading_h4,
-                      ),
-                    )),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Commonappcolor.COLOR_PRIMARY,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5))),
-                  child: SizedBox(
-                      width: 100,
-                      child: Center(
-                          child: Text(
-                        'OK',
-                        style: TextStyle(color: Commonappcolor.white),
-                      ))),
-                  onPressed: () {
-                    AppSettings.openAppSettings(
-                        type: AppSettingsType.developer);
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            )
-          ],
-        );
-      },
-    );
   }
 
   void Navigatemethod() {
@@ -192,19 +126,32 @@ class _SignupState extends State<SignupButton> {
     }
   }
 
+  Future<void> clearAppCache() async {
+    try {
+      await DefaultCacheManager().emptyCache();
+      print("App cache cleared successfully.");
+    } catch (e) {
+      print("Error clearing app cache: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Commonappcolor.white,
       body: WillPopScope(
-        onWillPop: showExitPopup,
-        child:
-            /* Center(
-            child: Platform.isAndroid
-                ? Text('Running on Android\n\n Root Checker: $rootedCheck\n Developer Mode Enable:$devMode')
-                : Text('Running on iOS\n Jailbreak: $jailbreak \n')),
-      ),*/
-            SingleChildScrollView(
+        onWillPop: () async {
+          return await CustomHelper.showExitPopup(
+            context: context,
+            title: Commontext.exitapp,
+            description: Commontext.areyousure,
+            yesText: Commontext.yes,
+            noText: Commontext.no,
+            titleBackgroundColor: Commonappcolor.blue,
+            buttonColor: Commonappcolor.blue,
+          );
+        },
+        child: SingleChildScrollView(
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -264,7 +211,7 @@ class _SignupState extends State<SignupButton> {
                           child: CustomElevatedButton(
                             label: Commontext.signup,
                             onPressed: () {
-                             // Navigatemethod();
+                              // Navigatemethod();
                               Get.to(const Newreginstruction());
                             },
                           ),
