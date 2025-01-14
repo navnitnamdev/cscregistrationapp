@@ -2,9 +2,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:camera/camera.dart';
-
-import 'package:cscapp/views/Videorecordingdirectory/Firsttimerecording.dart';
 import 'package:flutter/material.dart';
+import 'package:cscapp/views/Videorecordingdirectory/Firsttimerecording.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -24,6 +23,7 @@ import 'package:geocoding/geocoding.dart';
 
 import '../common/CommonAppColor.dart';
 import '../customwidgets/CustomElevatedButton.dart';
+import '../customwidgets/CustomHelper.dart';
 import 'PreviewDetailsScreeen.dart';
 
 class Previousscreen extends StatefulWidget {
@@ -70,6 +70,7 @@ class PreviousscreenState extends State<Previousscreen> {
     currentDateTime = getCurrentDateTime();
 
     _initializeVideoPlayer();
+
     super.initState();
   }
 
@@ -90,31 +91,27 @@ class PreviousscreenState extends State<Previousscreen> {
   void fetchLocation() async {
     await Permission.camera.request();
     await Permission.microphone.request();
-    await Permission.storage.request();
-    await Permission.location.request();
-    // Display the latitude, longitude, and address
+     await Permission.location.request();
   }
 
   @override
   void dispose() {
     _videoController?.dispose();
-    // _clearVideoPreview();
 
     super.dispose();
   }
 
   Future<String> getIpAddress() async {
     try {
-      // Get all network interfaces
       final interfaces = await NetworkInterface.list(
-        includeLoopback: false, // Exclude loopback addresses
-        type: InternetAddressType.any, // Both IPv4 and IPv6
+        includeLoopback: false,
+        type: InternetAddressType.any,
       );
 
       for (var interface in interfaces) {
         for (var address in interface.addresses) {
           if (address.address.isNotEmpty) {
-            return address.address; // Return the first valid IP address
+            return address.address;
           }
         }
       }
@@ -127,7 +124,6 @@ class PreviousscreenState extends State<Previousscreen> {
 
   Future<String> getSimpleLocation() async {
     try {
-      // Check if location services are enabled
       if (!await Geolocator.isLocationServiceEnabled()) {
         return "Location services are disabled.";
       }
@@ -147,7 +143,7 @@ class PreviousscreenState extends State<Previousscreen> {
         desiredAccuracy: LocationAccuracy.bestForNavigation,
       );
 
-       List<Placemark> placemarks = await placemarkFromCoordinates(
+      List<Placemark> placemarks = await placemarkFromCoordinates(
         position.latitude,
         position.longitude,
       );
@@ -160,7 +156,7 @@ class PreviousscreenState extends State<Previousscreen> {
       getlongitude = position.latitude.toString();
       getAddress = address.toString();
       print("latitude_here" + getlatitude.toString());
-      // Return formatted result
+
       return "Latitude: ${position.latitude}, Longitude: ${position.longitude}, Address: $address";
     } catch (e) {
       return "Failed to get location: $e";
@@ -183,6 +179,40 @@ class PreviousscreenState extends State<Previousscreen> {
     String refId = formattedDateTime + randomNumber.toString().padLeft(4, '0');
 
     return refId;
+  }
+
+  void showPermissionToast(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Expanded(
+              child: Text(
+                "Please allow all permissions and",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            GestureDetector(
+              onTap: () async {
+                await openAppSettings();
+              },
+              child: const Text(
+                "click here",
+                style: TextStyle(
+                  color: Colors.yellow,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.blue,
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 5),
+      ),
+    );
   }
 
   @override
@@ -340,31 +370,26 @@ class PreviousscreenState extends State<Previousscreen> {
                               children: [
                                 TextSpan(
                                   text: Commontext.videoshouldbebackend,
-                                  // Large "Sign Up" text
                                   style: Stylefile
                                       .Text_black_13_heading_h6_robo_med,
                                 ),
                                 TextSpan(
                                   text: Commontext.kiosk,
-                                  // Large "Sign Up" text
                                   style: Stylefile
                                       .Text_black_14_heading_h6_robo_bold,
                                 ),
                                 TextSpan(
                                   text: Commontext.alongwith,
-                                  // Smaller subtitle
                                   style: Stylefile
                                       .Text_black_13_heading_h6_robo_med,
                                 ),
                                 TextSpan(
                                   text: Commontext.applicantstanding,
-                                  // Smaller subtitle
                                   style: Stylefile
                                       .Text_black_14_heading_h6_robo_bold,
                                 ),
                                 TextSpan(
                                   text: Commontext.infrontof,
-                                  // Smaller subtitle
                                   style: Stylefile
                                       .Text_black_13_heading_h6_robo_med,
                                 ),
@@ -391,25 +416,21 @@ class PreviousscreenState extends State<Previousscreen> {
                               children: [
                                 TextSpan(
                                   text: Commontext.whilerecordingthevideo,
-                                  // Large "Sign Up" text
                                   style: Stylefile
                                       .Text_black_13_heading_h6_robo_med,
                                 ),
                                 TextSpan(
                                   text: Commontext.name,
-                                  // Large "Sign Up" text
                                   style: Stylefile
                                       .Text_black_14_heading_h6_robo_bold,
                                 ),
                                 TextSpan(
                                   text: Commontext.and,
-                                  // Large "Sign Up" text
                                   style: Stylefile
                                       .Text_black_13_heading_h6_robo_med,
                                 ),
                                 TextSpan(
                                   text: Commontext.dob,
-                                  // Large "Sign Up" text
                                   style: Stylefile
                                       .Text_black_14_heading_h6_robo_bold,
                                 ),
@@ -429,10 +450,145 @@ class PreviousscreenState extends State<Previousscreen> {
             if (_videoPath == null)
               GestureDetector(
                 onTap: () async {
-                  List<CameraDescription> cameras = await availableCameras();
+                  CustomHelper.showToast(
+                      context, "Please allow all permissions");
 
-                  // Navigate to Screen B and wait for the result
-                  final recordedVideoPath = await Get.to(
+                  var cameraStatus = await Permission.camera.status;
+                  if (cameraStatus.isDenied) {
+                    cameraStatus = await Permission.camera.request();
+                  }
+
+                  var microphoneStatus = await Permission.microphone.status;
+                  if (microphoneStatus.isDenied) {
+                    microphoneStatus = await Permission.microphone.request();
+                  }
+
+                  var locationStatus = await Permission.location.status;
+                  if (locationStatus.isDenied) {
+                    locationStatus = await Permission.location.request();
+                  }
+
+                  String cameraMessage = cameraStatus.isGranted
+                      ? "Camera Permission:- Granted"
+                      : "Camera Permission:- Denied";
+                  String microphoneMessage = microphoneStatus.isGranted
+                      ? "Microphone Permission:- Granted"
+                      : "Microphone Permission:- Denied";
+                  String locationMessage = locationStatus.isGranted
+                      ? "Location Permission:- Granted"
+                      : "Location Permission:- Denied";
+
+                  if (cameraStatus.isGranted == false ||
+                      microphoneStatus.isGranted == false ||
+                      locationStatus.isGranted == false) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: Commonappcolor.white,
+                        titlePadding:
+                            const EdgeInsets.only(top: 0, left: 0, right: 00),
+                        buttonPadding: const EdgeInsets.all(10),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              5.0,
+                            ),
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 5),
+                        title: Container(
+                            color: Colors.blue,
+                            child: const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Permission Status",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Commonappcolor.white),
+                                  ),
+                                ),
+                              ),
+                            )),
+                        content: RichText(
+                            text: TextSpan(children: [
+                          TextSpan(
+                            text:
+                                "\nPlease allow permissions to access camera, location and microphone :-\n ",
+                            style: Stylefile.Textcolor_black_16_heading_h4,
+                          ),
+                          TextSpan(
+                            text:
+                                "\n$cameraMessage\n$microphoneMessage\n$locationMessage",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ])),
+                        actions: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Center(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Commonappcolor.COLOR_PRIMARY,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5))),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                openAppSettings();
+                                showPermissionToast(context);
+                              },
+                              child: SizedBox(
+                                  width: 100,
+                                  child: Center(
+                                      child: Text(
+                                    "OK",
+                                    style: Stylefile
+                                        .Text_white_20_heading_h6_robo_bold,
+                                  ))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    print("cameraStatus.isGranted" +
+                        cameraStatus.isGranted.toString());
+
+                    List<CameraDescription> cameras = await availableCameras();
+                    final recordedVideoPath = await Get.to(
+                      Firsttimerecording(cameras: cameras),
+                    );
+
+                    if (recordedVideoPath != null) {
+                      setState(() {
+                        _videoPath = recordedVideoPath;
+                        print("video_path_0" + _videoPath.toString());
+
+                        _videoController =
+                            VideoPlayerController.file(File(_videoPath!))
+                              ..addListener(() {
+                                if (_videoController!.value.position ==
+                                    _videoController!.value.duration) {
+                                  setState(() {});
+                                }
+                              })
+                              ..initialize().then((_) {
+                                setState(() {});
+                                _videoController!.pause();
+                              });
+                      });
+
+                      fileName = basename(_videoPath.toString());
+                      locget();
+                    }
+                  }
+
+                  /*List<CameraDescription> cameras = await availableCameras();
+                   final recordedVideoPath = await Get.to(
                     Firsttimerecording(cameras: cameras),
                   );
 
@@ -457,7 +613,7 @@ class PreviousscreenState extends State<Previousscreen> {
 
                     fileName = basename(_videoPath.toString());
                     locget();
-                  }
+                  }*/
                 },
                 child: Container(
                     margin: const EdgeInsets.all(20.0),
@@ -468,12 +624,10 @@ class PreviousscreenState extends State<Previousscreen> {
                               width: 220,
                               height: 220,
                               decoration: BoxDecoration(
-                                //color: Commonappcolor.backgrounfimagecolor,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
                                   color: Commonappcolor.textbluecolor,
-                                  // Set the border color
-                                  width: 3.0, // Set the border width
+                                  width: 3.0,
                                 ),
                               ),
                               child: Column(
@@ -516,7 +670,6 @@ class PreviousscreenState extends State<Previousscreen> {
                 _videoController != null &&
                 _videoController!.value.isInitialized)
               Container(
-                //padding: const EdgeInsets.all(15),
                 margin: const EdgeInsets.all(20.0),
                 /*   width: MediaQuery
                     .of(context)
@@ -524,20 +677,16 @@ class PreviousscreenState extends State<Previousscreen> {
                     .width,*/
                 width: 220,
                 height: 220,
-
                 decoration: BoxDecoration(
-                  //color: Commonappcolor.backgrounfimagecolor,
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: Commonappcolor.textbluecolor, // Set the border color
-                    width: 3.0, // Set the border width
+                    color: Commonappcolor.textbluecolor,
+                    width: 3.0,
                   ),
                 ),
-
                 child: Stack(
                   children: [
                     Container(
-                      //  width: MediaQuery.of(context).size.width,
                       width: 220,
                       height: 220,
                       decoration: BoxDecoration(
@@ -548,12 +697,9 @@ class PreviousscreenState extends State<Previousscreen> {
                         borderRadius: BorderRadius.circular(20.0),
                         child: FittedBox(
                           fit: BoxFit.cover,
-                          // Adjust this to your desired fit (cover, contain, fill, etc.)
                           child: SizedBox(
                             width: _videoController!.value.size.width,
-                            // Video width
                             height: _videoController!.value.size.height,
-                            // Video height
                             child: VideoPlayer(_videoController!),
                           ),
                         ),
@@ -614,7 +760,6 @@ class PreviousscreenState extends State<Previousscreen> {
                               List<CameraDescription> cameras =
                                   await availableCameras();
 
-                              // Navigate to Screen B and wait for the result
                               final recordedVideoPath = await Get.to(
                                 Firsttimerecording(cameras: cameras),
                               );
@@ -633,8 +778,7 @@ class PreviousscreenState extends State<Previousscreen> {
                                     })
                                     ..initialize().then((_) {
                                       setState(() {});
-                                      _videoController!
-                                          .pause(); // Optionally auto-play the video
+                                      _videoController!.pause();
                                     });
                                 });
                               }
@@ -651,7 +795,6 @@ class PreviousscreenState extends State<Previousscreen> {
                               setState(() {});
 
                               Get.to(PreviewDetailsScreeen(
-                                //  videopath: videoPath_.toString(),
                                 videopath: _videoPath.toString(),
                                 filename: fileName,
                                 refrenceid: refId.toString(),
@@ -680,7 +823,6 @@ class PreviousscreenState extends State<Previousscreen> {
                               });
                             } else {
                               Get.to(PreviewDetailsScreeen(
-                                  //  videopath: videoPath_.toString(),
                                   videopath: _videoPath.toString(),
                                   filename: fileName,
                                   refrenceid: refId.toString(),

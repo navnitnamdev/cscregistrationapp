@@ -87,28 +87,27 @@ class _NewreginstructionState extends State<Newreginstruction> {
                         children: [
                           TextSpan(
                             text: Commontext.applicationsecurecode,
-                            // Large "Sign Up" text
-                            style: Stylefile.Text_black_14_heading_h6_robo_bold,
+                             style: Stylefile.Text_black_14_heading_h6_robo_bold,
                           ),
                           const TextSpan(
-                            text: " and", // Smaller subtitle
+                            text: " and",
                             style: Stylefile.Text_black_13_heading_h6_robo_med,
                           ),
                           const TextSpan(
-                            text: " Mobile Number ", // Large "Sign Up" text
+                            text: " Mobile Number ",
                             style: Stylefile.Text_black_14_heading_h6_robo_bold,
                           ),
                           TextSpan(
                             text: Commontext.whichissentonmobile,
-                            // Smaller subtitle
+
                             style: Stylefile.Text_black_13_heading_h6_robo_med,
                           ),
                           const TextSpan(
-                            text: " Email Id ", // Smaller subtitle
+                            text: " Email Id ",
                             style: Stylefile.Text_black_14_heading_h6_robo_bold,
                           ),
                           TextSpan(
-                            text: Commontext.retrive, // Smaller subtitle
+                            text: Commontext.retrive,
                             style: Stylefile.Text_black_13_heading_h6_robo_med,
                           ),
                         ],
@@ -155,22 +154,22 @@ class _NewreginstructionState extends State<Newreginstruction> {
                         children: [
                           TextSpan(
                             text: Commontext.camerafunctioning,
-                            // Large "Sign Up" text
+
                             style: Stylefile.Text_black_13_heading_h6_robo_med,
                           ),
                           TextSpan(
                             text: Commontext.geotaggedvidio,
-                            // Large "Sign Up" text
+
                             style: Stylefile.Text_black_14_heading_h6_robo_bold,
                           ),
                           TextSpan(
                             text: Commontext.ofself,
-                            // Smaller subtitle
+
                             style: Stylefile.Text_black_13_heading_h6_robo_med,
                           ),
                           TextSpan(
                             text:  Commontext.kioskcenter,
-                            // Smaller subtitle
+
                             style: Stylefile.Text_black_14_heading_h6_robo_bold,
                           ),
                         ],

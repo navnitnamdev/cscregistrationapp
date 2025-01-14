@@ -28,7 +28,7 @@ class CustomElevatedButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             
             borderRadius: BorderRadius.circular(8),
-            side: BorderSide(
+            side: const BorderSide(
               color:Commonappcolor.textbluecolor,
               width: 2.0,
             ),
@@ -49,7 +49,7 @@ void main() {
   runApp(MaterialApp(
     home: Scaffold(
       appBar: AppBar(
-        title: Text("Custom Elevated Button"),
+        title: const Text("Custom Elevated Button"),
       ),
       body: Center(
         child: CustomElevatedButton(

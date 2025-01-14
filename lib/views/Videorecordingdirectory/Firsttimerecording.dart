@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:video_player/video_player.dart';
+ import 'package:video_player/video_player.dart';
 
 import '../../common/CommonAppColor.dart';
 import '../../common/CommonText.dart';
@@ -85,12 +85,7 @@ class _FrontCameraScreenState extends State<Firsttimerecording>  with WidgetsBin
 
     Get.back(result: _recordedVideoPath);
 
-  /*  // After video is saved, clear cache (delete temp file)
-    final File recordedVideo = File(videoFile.path);
-    if (await recordedVideo.exists()) {
-      await recordedVideo.delete(); // Clear the video file from storage
-      print('Video cache cleared.');
-    }*/
+
     print('Recorded Video Path: $_recordedVideoPath');
   }
 
@@ -147,7 +142,7 @@ class _FrontCameraScreenState extends State<Firsttimerecording>  with WidgetsBin
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Camera Preview
+
             Visibility(
               visible: clearvisibleornot,
               child: Row(
@@ -217,11 +212,10 @@ class _FrontCameraScreenState extends State<Firsttimerecording>  with WidgetsBin
                 ),
               ),
 
-            //   else Center(child: CircularProgressIndicator()),
 
             const SizedBox(height: 20),
 
-            // Countdown Timer Display
+
             if (isRecording)
               Text(
                 'Remaining Time: $_remainingTime seconds',
@@ -231,7 +225,7 @@ class _FrontCameraScreenState extends State<Firsttimerecording>  with WidgetsBin
                     color: Colors.red),
               ),
 
-            // Buttons for Recording
+
             Visibility(
               visible: btnstartrecording,
               child: Row(
@@ -243,6 +237,8 @@ class _FrontCameraScreenState extends State<Firsttimerecording>  with WidgetsBin
                       clearvisibleornot = false;
                       visiblesaynamedob = true;
                       btnstartrecording = false;
+
+
                     },
                     icon: const Icon(
                       Icons.videocam,
@@ -257,7 +253,7 @@ class _FrontCameraScreenState extends State<Firsttimerecording>  with WidgetsBin
               ),
             ),
 
-            // Video Preview
+
             if (showVideoPreview && _videoController != null)
               Column(
                 children: [

@@ -68,7 +68,7 @@ class Apiservice {
       );
       var response = await request.send();
 
-      Navigator.pop(context); // Pop the progress dialog
+      Navigator.pop(context);
 
       if (response.statusCode == 200) {
         var responseBody = await response.stream.bytesToString();

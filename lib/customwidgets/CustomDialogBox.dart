@@ -18,7 +18,7 @@ class Customdialogbox {
               ),
             ),
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 5),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 5),
           title: Container(
             color: Commonappcolor.blue,
             child: const Center(
@@ -37,12 +37,12 @@ class Customdialogbox {
               ),
             ),
           ),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Center(
                     child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Text(
                       'You need to have mobile data or wifi to access this. '),
                 )),
@@ -56,7 +56,7 @@ class Customdialogbox {
                     backgroundColor: Commonappcolor.COLOR_PRIMARY,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5))),
-                child: SizedBox(
+                child: const SizedBox(
                     width: 100,
                     child: Center(
                         child: Text(

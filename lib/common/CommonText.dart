@@ -61,7 +61,7 @@ class Commontext {
   static String sourcecode = "Source Code ";
   static String cscapp = "CSC APP ";
   static String iherebythat = "I hereby state that entered details are correct as per my knowledge ";
-  static String apprefnumbercannot = "App ref number cannot be empty ";
+  static String apprefnumbercannot = "App ref number is required ";
   static String pleaseentervalidappnumber = "Please enter a valid application reference number  ";
   static String securecodecannotbeempty = "Secure code can not be empty. ";
   static String pleaseceept = "Please accept it. ";

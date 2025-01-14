@@ -19,7 +19,7 @@ void main() async {
   ]).then((_) {
     runApp(MyApp());
   });
-  //runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -34,8 +34,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: SplashScreen(),
-     // home: Previousscreen(cameras: cameras),
-      debugShowCheckedModeBanner: false,
+       debugShowCheckedModeBanner: false,
     );
   }
 }

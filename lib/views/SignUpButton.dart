@@ -11,8 +11,10 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+ import 'package:permission_handler/permission_handler.dart';
 import 'package:root_checker_plus/root_checker_plus.dart';
 import '../common/CommonText.dart';
+import '../common/PermissionHelper.dart';
 import '../common/TextStyle.dart';
 import '../customwidgets/CustomElevatedButton.dart';
 
@@ -34,6 +36,7 @@ class _SignupState extends State<SignupButton> {
 
   @override
   void initState() {
+
     if (Platform.isAndroid) {
       androidRootChecker();
       developerMode();
@@ -46,6 +49,8 @@ class _SignupState extends State<SignupButton> {
     formattedDate = DateFormat('yyyy').format(now);
 
     clearAppCache();
+    clearApplicationCache();
+
     super.initState();
   }
 
@@ -110,10 +115,11 @@ class _SignupState extends State<SignupButton> {
         androidRootChecker();
         developerMode();
       } else {
-        Get.to(const Newreginstruction());
+
+        onSubmit(context);
       }
     } else if (Platform.isIOS) {
-      // iOS-specific logic
+
       if (devMode == true) {
         iosJailbreak();
         developerMode();
@@ -129,10 +135,120 @@ class _SignupState extends State<SignupButton> {
   Future<void> clearAppCache() async {
     try {
       await DefaultCacheManager().emptyCache();
-      print("App cache cleared successfully.");
+
     } catch (e) {
-      print("Error clearing app cache: $e");
+     }
+  }
+
+
+
+
+  Future<void> clearApplicationCache() async {
+    try {
+      // Get the temporary directory
+      final tempDir = await getTemporaryDirectory();
+
+      // Get the application support directory
+      final appSupportDir = await getApplicationSupportDirectory();
+
+      // Get the application documents directory
+      final appDocumentsDir = await getApplicationDocumentsDirectory();
+
+      // Delete the temporary directory
+      if (tempDir.existsSync()) {
+        tempDir.deleteSync(recursive: true);
+        print("Temporary cache cleared.");
+      }
+
+      // Delete the application support directory
+      if (appSupportDir.existsSync()) {
+        appSupportDir.deleteSync(recursive: true);
+        print("Application support cache cleared.");
+      }
+
+      // Delete the application documents directory
+      if (appDocumentsDir.existsSync()) {
+        appDocumentsDir.deleteSync(recursive: true);
+        print("Application documents cache cleared.");
+      }
+
+      print("All application cache cleared successfully!");
+    } catch (e) {
+      print("Error while clearing application cache: $e");
     }
+  }
+
+  void onSubmit(BuildContext context) async {
+    List<String> deniedPermissions = await checkPermissionsStatus();
+
+    if (deniedPermissions.isEmpty) {
+      // Navigatemethod();
+      Get.to(const Newreginstruction());
+    } else {
+      await requestAllPermissions(context);
+    }
+  }
+  Future<List<String>> checkPermissionsStatus() async {
+    List<String> deniedPermissions = [];
+
+    if (await Permission.location.isDenied) {
+      deniedPermissions.add("Location");
+      PermissionHelper.requestLocationPermission(context);
+    }
+
+    // Check Camera Permission
+    if (await Permission.camera.isDenied) {
+      deniedPermissions.add("Camera");
+      PermissionHelper.requestCameraPermission(context);
+    }
+
+    // Check Microphone Permission
+    if (await Permission.microphone.isDenied) {
+      deniedPermissions.add("Microphone");
+      PermissionHelper.requestMicrophonePermission(context);
+    }
+
+
+
+    return deniedPermissions;
+  }
+     Future<bool> requestAllPermissions(BuildContext context) async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.location,
+      Permission.camera,
+      Permission.microphone,
+    ].request();
+
+    List<String> deniedPermissions = [];
+
+    if (statuses[Permission.location]?.isDenied == true) {
+      deniedPermissions.add("Location");
+    }
+    if (statuses[Permission.camera]?.isDenied == true) {
+      deniedPermissions.add("Camera");
+    }
+    if (statuses[Permission.microphone]?.isDenied == true) {
+      deniedPermissions.add("Microphone");
+    }
+
+    /*if (deniedPermissions.isNotEmpty) {
+      CustomHelper.showCustomAlertDialogDeveloperMode(
+        context: context,
+        title: "Permissions Required",
+        description: "Please allow the following permissions: ${deniedPermissions.join(", ")}",
+        onOkPressed: () async {
+          await requestAllPermissions(context);
+          Navigator.of(context).pop();
+        },
+        backgroundColor: Colors.white,
+        titleBackgroundColor: Colors.blue,
+        buttonColor: Colors.blue,
+      );
+      return false;
+    }*/
+
+    print("All permissions granted.");
+    return true;
   }
 
   @override
@@ -210,9 +326,11 @@ class _SignupState extends State<SignupButton> {
                         child: Center(
                           child: CustomElevatedButton(
                             label: Commontext.signup,
-                            onPressed: () {
-                              // Navigatemethod();
-                              Get.to(const Newreginstruction());
+                            onPressed: () async {
+                             //  Navigatemethod();
+                              onSubmit(context);
+
+
                             },
                           ),
                         ),
@@ -264,7 +382,7 @@ class _SignupState extends State<SignupButton> {
                   ),
                 ),
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 5),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 5),
               title: Container(
                 color: Commonappcolor.blue,
                 child: const Center(
@@ -309,7 +427,7 @@ class _SignupState extends State<SignupButton> {
                             backgroundColor: Commonappcolor.COLOR_PRIMARY,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5))),
-                        child: SizedBox(
+                        child: const SizedBox(
                             width: 100,
                             child: Center(
                                 child: Text(
@@ -321,7 +439,7 @@ class _SignupState extends State<SignupButton> {
                         },
                       ),
                     ),
-                    SpaceBox(
+                    const SpaceBox(
                       width: 20,
                     ),
                     Expanded(
@@ -330,7 +448,7 @@ class _SignupState extends State<SignupButton> {
                             backgroundColor: Commonappcolor.COLOR_PRIMARY,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5))),
-                        child: SizedBox(
+                        child: const SizedBox(
                             width: 100,
                             child: Center(
                                 child: Text(

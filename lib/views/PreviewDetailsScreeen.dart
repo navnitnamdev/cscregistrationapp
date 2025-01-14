@@ -5,7 +5,6 @@ import 'package:cscapp/CommonBaseUrl/Apiservice.dart';
 import 'package:cscapp/common/CommonAppColor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 import '../common/AppImagesPath.dart';
 import '../common/CommonText.dart';
@@ -308,39 +307,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        /*Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 20, // Adjust as needed
-                              height: 20,
-                              child: Checkbox(
-                                activeColor: Commonappcolor.blue,
-                                autofocus: true,
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                                value: _isChecked,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    _isChecked = value ?? false;
-                                    _validateAndSubmit();
-                                  });
-                                },
-                              ),
-                            ),
-                            const SpaceBox(
-                              width: 10,
-                            ),
-                            Flexible(
-                              child: Text(
-                                Commontext.iherebythat,
-                                style:
-                                    Stylefile.Text_black_13_heading_h6_robo_med,
-                              ),
-                            ),
-                          ],
-                        ),*/
+
                           Align(
                             alignment: Alignment.topLeft,
                             child: CheckboxListTile(
@@ -348,7 +315,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                               controlAffinity: ListTileControlAffinity.leading,
 
                               title: Transform.translate(
-                                offset: Offset(-10, 0), // टेक्स्ट को थोड़ा बाईं ओर खिसकाएं
+                                offset: Offset(-10, 0),
                                 child: Text(
                                   Commontext.iherebythat,
                                   style: Stylefile.Text_black_14_heading_h6_robo_med,
@@ -356,7 +323,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                               ),
                               visualDensity: VisualDensity.comfortable,
                               activeColor: Commonappcolor.blue,
-                              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap, // टैप टारगेट को छोटा करें
+                              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               autofocus: true,
 
                               value: _isChecked,

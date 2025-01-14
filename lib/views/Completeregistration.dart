@@ -14,7 +14,6 @@ import '../customwidgets/SpaceBox.dart';
 import 'package:get_storage/get_storage.dart';
 import 'PreviousScreen.dart';
 
-//late List<CameraDescription> cameras;
 
 class Completeregistration extends StatefulWidget {
   const Completeregistration({super.key});
@@ -33,10 +32,7 @@ class _CompleteregistrationState extends State<Completeregistration> {
   bool _isPasswordVisible = false;
   GetStorage box = GetStorage();
 
- /* CameraController? _controller;
-  late List<CameraDescription> cameras;*/
 
-  // Create FocusNodes for each text field
   final FocusNode _focusNode1 = FocusNode();
   final FocusNode _focusNode2 = FocusNode();
   final FocusNode _focusNode3 = FocusNode();
@@ -96,7 +92,7 @@ class _CompleteregistrationState extends State<Completeregistration> {
   void validateMobileNumber(String value) {
     setState(() {
       if (value.isEmpty) {
-        _mobilenumber = 'Mobile number cannot be empty';
+        _mobilenumber = 'Mobile number is required';
       } else if (value.length < 10) {
         _mobilenumber = 'Mobile number must be 10 digits';
       } else if (value == "0000000000") {
@@ -112,7 +108,7 @@ class _CompleteregistrationState extends State<Completeregistration> {
   void validateSecureCode(String value) {
     setState(() {
       if (value.isEmpty) {
-        _securecode = 'Secure code cannot be empty';
+        _securecode = 'Secure code is required';
       } else if (value.length < 6) {
         _securecode = 'Secure code must be at least 6 digits';
       } else {
@@ -192,247 +188,249 @@ class _CompleteregistrationState extends State<Completeregistration> {
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
             },
-            child: Stack(
+            child: /*Column(
               children: [
-                Container(
-                  padding: const EdgeInsets.all(30),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height * 0.9,
-                          child: Column(
-                            children: [
-                              const SpaceBox(height: 30),
-                              Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.back();
-                                    },
-                                    child: Image.asset(
-                                      AppimagesPath.backicon,
-                                      scale: .8,
-                                    ),
+
+              ],
+            ),*/SingleChildScrollView(
+              child:  Container(
+                padding: const EdgeInsets.all(30),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * 0.9,
+                        child: Column(
+                          children: [
+                            const SpaceBox(height: 30),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: Image.asset(
+                                    AppimagesPath.backicon,
+                                    scale: .8,
                                   ),
-                                  const SizedBox(width: 10),
-                                  Flexible(
-                                    child: Text(
-                                      Commontext.completeregistration,
-                                      /*  style: Stylefile.Textcolor_blue_30,
+                                ),
+                                const SizedBox(width: 10),
+                                Flexible(
+                                  child: Text(
+                                    Commontext.completeregistration,
+                                    /*  style: Stylefile.Textcolor_blue_30,
                                   overflow: TextOverflow.ellipsis,*/
-                                      style: Stylefile.Textcolor_blue_20,
-                                    ),
+                                    style: Stylefile.Textcolor_blue_20,
                                   ),
-                                ],
-                              ),
-                              const SizedBox(height: 80),
-                              TextFormField(
-                                textCapitalization: TextCapitalization.words,
-                                textAlignVertical: TextAlignVertical.center,
-                                controller: _ApprefnumberController,
-                                keyboardType: TextInputType.text,
-                                inputFormatters: [_inputFormatter()],
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  labelStyle: const TextStyle(
-                                      color: Commonappcolor.blue),
-                                  prefixIcon: Image.asset(
-                                    AppimagesPath.appreficon,
-                                    scale: 2.5,
-                                  ),
-                                  hintText: Commontext.apprefnum,
-                                  hintStyle: Stylefile.hinttextstle_16,
-                                  errorText: _apprefnumber.isNotEmpty
-                                      ? _apprefnumber
-                                      : null,
                                 ),
-                                focusNode: _focusNode1,
-                                textInputAction: TextInputAction.next,
-                                onEditingComplete: () {
-                                  // Move focus to the next field when "next" is pressed
-                                  _focusNode1.unfocus();
-                                  FocusScope.of(context)
-                                      .requestFocus(_focusNode2);
-                                },
-                                onChanged: (value) {
-                                  validateAppRefNumber(value);
-                                },
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Application Ref Number cannot be empty';
-                                  }
+                              ],
+                            ),
+                            const SizedBox(height: 80),
+                            TextFormField(
+                              textCapitalization: TextCapitalization.words,
+                              textAlignVertical: TextAlignVertical.center,
+                              controller: _ApprefnumberController,
+                              keyboardType: TextInputType.text,
+                              inputFormatters: [_inputFormatter()],
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                labelStyle: const TextStyle(
+                                    color: Commonappcolor.blue),
+                                prefixIcon: Image.asset(
+                                  AppimagesPath.appreficon,
+                                  scale: 2.5,
+                                ),
+                                hintText: Commontext.apprefnum,
+                                hintStyle: Stylefile.hinttextstle_16,
+                                errorText: _apprefnumber.isNotEmpty
+                                    ? _apprefnumber
+                                    : null,
+                              ),
+                              focusNode: _focusNode1,
+                              textInputAction: TextInputAction.next,
+                              onEditingComplete: () {
+                                // Move focus to the next field when "next" is pressed
+                                _focusNode1.unfocus();
+                                FocusScope.of(context)
+                                    .requestFocus(_focusNode2);
+                              },
+                              onChanged: (value) {
+                                validateAppRefNumber(value);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Application Ref Number is required';
+                                }
 
-                                  return null;
-                                },
-                              ),
-                              const SizedBox(height: 30),
-                              TextFormField(
-                                keyboardType: TextInputType.number,
-                                textAlignVertical: TextAlignVertical.center,
-                                inputFormatters: [
-                                  LengthLimitingTextInputFormatter(6),
-                                  FilteringTextInputFormatter.digitsOnly,
-                                ],
-                                maxLines: 1,
-                                obscureText: !_isPasswordVisible,
-                                controller: _securecodecontroller,
-                                focusNode: _focusNode2,
-                                textInputAction: TextInputAction.next,
-                                // Use next action key
-                                onEditingComplete: () {
-                                  // Move focus to the next field when "next" is pressed
-                                  _focusNode2.unfocus();
-                                  FocusScope.of(context)
-                                      .requestFocus(_focusNode3);
-                                },
-                                decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _isPasswordVisible
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _isPasswordVisible =
-                                            !_isPasswordVisible;
-                                      });
-                                    },
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 30),
+                            TextFormField(
+                              keyboardType: TextInputType.number,
+                              textAlignVertical: TextAlignVertical.center,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(6),
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              maxLines: 1,
+                              obscureText: !_isPasswordVisible,
+                              controller: _securecodecontroller,
+                              focusNode: _focusNode2,
+                              textInputAction: TextInputAction.next,
+                              // Use next action key
+                              onEditingComplete: () {
+                                // Move focus to the next field when "next" is pressed
+                                _focusNode2.unfocus();
+                                FocusScope.of(context)
+                                    .requestFocus(_focusNode3);
+                              },
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _isPasswordVisible
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
                                   ),
-                                  labelStyle: const TextStyle(
-                                      color: Commonappcolor.blue),
-                                  prefixIcon: Image.asset(
-                                    AppimagesPath.sourcecodeicon,
-                                    scale: 3,
-                                  ),
-                                  hintText: Commontext.securecode,
-                                  hintStyle: Stylefile.hinttextstle_16,
-                                  errorText: _securecode.isNotEmpty
-                                      ? _securecode
-                                      : null,
-                                ),
-                                onChanged: (value) {
-                                  validateSecureCode(value);
-                                },
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Secure code cannot be empty';
-                                  }
-                                  if (value.length < 6) {
-                                    return 'Secure code must be at least 6 digits';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              const SizedBox(height: 15),
-                              TextFormField(
-                                textAlignVertical: TextAlignVertical.center,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  LengthLimitingTextInputFormatter(10),
-                                  FilteringTextInputFormatter.digitsOnly,
-                                ],
-                                maxLines: 1,
-                                controller: _mobilenumbercontroller,
-                                focusNode: _focusNode3,
-                                textInputAction: TextInputAction.done,
-                                decoration: InputDecoration(
-                                  labelStyle: const TextStyle(
-                                      color: Commonappcolor.blue),
-                                  prefixIcon: Image.asset(
-                                    AppimagesPath.mobileimg,
-                                    scale: 3,
-                                  ),
-                                  hintText: Commontext.mobilenumber,
-                                  hintStyle: Stylefile.hinttextstle_16,
-                                  errorText: _mobilenumber.isNotEmpty
-                                      ? _mobilenumber
-                                      : null,
-                                ),
-                                onChanged: (value) {
-                                  validateMobileNumber(value);
-                                },
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Mobile number cannot be empty';
-                                  }
-                                  if (value.length != 10) {
-                                    return 'Mobile number must be exactly 10 digits';
-                                  }
-                                  if (!RegExp(r'^[6-9]\d{9}$')
-                                      .hasMatch(value)) {
-                                    return ' Mobile number must start with a digit greater than 6 ';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CustomElevatedButton(
-                                  label: Commontext.proceedtocapture,
                                   onPressed: () {
-                                    final apprefnumberinput =
-                                        _ApprefnumberController.text;
-                                    final securecodeinput =
-                                        _securecodecontroller.text;
-                                    final mobnumberinput =
-                                        _mobilenumbercontroller.text;
-
-                                    validateSecureCode(securecodeinput);
-                                    validateMobileNumber(mobnumberinput);
-                                    validateAppRefNumber(apprefnumberinput);
-
-                                    if (apprefnumberinput.isEmpty) {
-                                      CustomHelper.showToast(context,
-                                          Commontext.pleasefillapprefnumber);
-                                    } else if (apprefnumberinput.length < 12) {
-                                      CustomHelper.showToast(
-                                          context,
-                                          Commontext
-                                              .pleasefillapprefnumberupto1216);
-                                    } else if (securecodeinput.isEmpty) {
-                                      CustomHelper.showToast(context,
-                                          Commontext.pleasefillsecurecode);
-                                    } else if (securecodeinput.length < 6) {
-                                      CustomHelper.showToast(
-                                          context,
-                                          Commontext
-                                              .pleasefillsecurecodesixdigit);
-                                    } else if (mobnumberinput.isEmpty) {
-                                      CustomHelper.showToast(
-                                          context, Commontext.mobcannotbeempty);
-                                    } else if (mobnumberinput.length < 10) {
-                                      CustomHelper.showToast(context,
-                                          Commontext.mobilenumbertendigit);
-                                    } else if (!RegExp(r'^[6-9]\d{9}$')
-                                        .hasMatch(mobnumberinput.toString())) {
-                                      CustomHelper.showToast(
-                                          context,
-                                          Commontext
-                                              .mobnumberstartabovesixdigit);
-                                    } else if (mobnumberinput == "0000000000") {
-                                      CustomHelper.showToast(context,
-                                          Commontext.mobilenummberinvalid);
-                                    } else {
-                                      validateAndProceed(apprefnumberinput, securecodeinput, mobnumberinput);
-                                    }
+                                    setState(() {
+                                      _isPasswordVisible =
+                                      !_isPasswordVisible;
+                                    });
                                   },
                                 ),
+                                labelStyle: const TextStyle(
+                                    color: Commonappcolor.blue),
+                                prefixIcon: Image.asset(
+                                  AppimagesPath.sourcecodeicon,
+                                  scale: 3,
+                                ),
+                                hintText: Commontext.securecode,
+                                hintStyle: Stylefile.hinttextstle_16,
+                                errorText: _securecode.isNotEmpty
+                                    ? _securecode
+                                    : null,
                               ),
-                            ],
-                          ),
+                              onChanged: (value) {
+                                validateSecureCode(value);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Secure code is required';
+                                }
+                                if (value.length < 6) {
+                                  return 'Secure code must be at least 6 digits';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 15),
+                            TextFormField(
+                              textAlignVertical: TextAlignVertical.center,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(10),
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              maxLines: 1,
+                              controller: _mobilenumbercontroller,
+                              focusNode: _focusNode3,
+                              textInputAction: TextInputAction.done,
+                              decoration: InputDecoration(
+                                labelStyle: const TextStyle(
+                                    color: Commonappcolor.blue),
+                                prefixIcon: Image.asset(
+                                  AppimagesPath.mobileimg,
+                                  scale: 3,
+                                ),
+                                hintText: Commontext.mobilenumber,
+                                hintStyle: Stylefile.hinttextstle_16,
+                                errorText: _mobilenumber.isNotEmpty
+                                    ? _mobilenumber
+                                    : null,
+                              ),
+                              onChanged: (value) {
+                                validateMobileNumber(value);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Mobile number is required';
+                                }
+                                if (value.length != 10) {
+                                  return 'Mobile number must be exactly 10 digits';
+                                }
+                                if (!RegExp(r'^[6-9]\d{9}$')
+                                    .hasMatch(value)) {
+                                  return ' Mobile number must start with a digit greater than 6 ';
+                                }
+                                return null;
+                              },
+                            ),
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomElevatedButton(
+                                label: Commontext.proceedtocapture,
+                                onPressed: () {
+                                  final apprefnumberinput =
+                                      _ApprefnumberController.text;
+                                  final securecodeinput =
+                                      _securecodecontroller.text;
+                                  final mobnumberinput =
+                                      _mobilenumbercontroller.text;
+
+                                  validateSecureCode(securecodeinput);
+                                  validateMobileNumber(mobnumberinput);
+                                  validateAppRefNumber(apprefnumberinput);
+
+                                  if (apprefnumberinput.isEmpty) {
+                                    CustomHelper.showToast(context,
+                                        Commontext.pleasefillapprefnumber);
+                                  } else if (apprefnumberinput.length < 12) {
+                                    CustomHelper.showToast(
+                                        context,
+                                        Commontext
+                                            .pleasefillapprefnumberupto1216);
+                                  } else if (securecodeinput.isEmpty) {
+                                    CustomHelper.showToast(context,
+                                        Commontext.pleasefillsecurecode);
+                                  } else if (securecodeinput.length < 6) {
+                                    CustomHelper.showToast(
+                                        context,
+                                        Commontext
+                                            .pleasefillsecurecodesixdigit);
+                                  } else if (mobnumberinput.isEmpty) {
+                                    CustomHelper.showToast(
+                                        context, Commontext.mobcannotbeempty);
+                                  } else if (mobnumberinput.length < 10) {
+                                    CustomHelper.showToast(context,
+                                        Commontext.mobilenumbertendigit);
+                                  } else if (!RegExp(r'^[6-9]\d{9}$')
+                                      .hasMatch(mobnumberinput.toString())) {
+                                    CustomHelper.showToast(
+                                        context,
+                                        Commontext
+                                            .mobnumberstartabovesixdigit);
+                                  } else if (mobnumberinput == "0000000000") {
+                                    CustomHelper.showToast(context,
+                                        Commontext.mobilenummberinvalid);
+                                  } else {
+                                    validateAndProceed(apprefnumberinput, securecodeinput, mobnumberinput);
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            )
           ),
         ));
   }
@@ -457,7 +455,8 @@ class _CompleteregistrationState extends State<Completeregistration> {
             ),
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 5),
-          title: Container(
+          title:
+          Container(
             color: Commonappcolor.blue,
             child: const Center(
               child: Padding(
