@@ -10,8 +10,7 @@ import '../common/AppImagesPath.dart';
 import '../common/CommonText.dart';
 import '../common/TextStyle.dart';
 import '../customwidgets/CustomDialogBox.dart';
- import '../customwidgets/CustomElevatedButton.dart';
-import '../customwidgets/SpaceBox.dart';
+import '../customwidgets/CustomElevatedButton.dart';
 import 'package:get_storage/get_storage.dart';
 
 class PreviewDetailsScreeen extends StatefulWidget {
@@ -89,7 +88,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
     _controller = VideoPlayerController.file(imgfile!)
       ..initialize().then((_) {
         setState(() {
-          // Ensures the build method runs and _controller is initialized
+
         });
       }).catchError((error) {});
 
@@ -130,7 +129,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SpaceBox(height: 40),
+              CustomHelper.verticalSpace(40),
               Row(
                 children: [
                   GestureDetector(
@@ -142,18 +141,14 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                       scale: .8,
                     ),
                   ),
-                  const SpaceBox(
-                    width: 20,
-                  ),
+                  CustomHelper.horizontalSpace(20),
                   Text(
                     Commontext.previewdetails,
                     style: Stylefile.Textcolor_blue_20,
                   ),
                 ],
               ),
-              const SpaceBox(
-                height: 20,
-              ),
+              CustomHelper.verticalSpace(20),
               Center(
                 child: Container(
                     width: 200,
@@ -191,9 +186,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                             height: 20,
                             child: Center(child: CircularProgressIndicator()))),
               ),
-              const SpaceBox(
-                height: 30,
-              ),
+              CustomHelper.verticalSpace(30),
               Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -203,9 +196,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                       Commontext.applicationrefnumber,
                       style: Stylefile.Text_black_16_heading_h6_robo_med,
                     ),
-                    const SpaceBox(
-                      height: 10,
-                    ),
+                    CustomHelper.verticalSpace(10),
                     Row(
                       children: [
                         SizedBox(
@@ -216,9 +207,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                             scale: .2,
                           ),
                         ),
-                        const SpaceBox(
-                          width: 10,
-                        ),
+                        CustomHelper.horizontalSpace(10),
                         Text(box.read("apprefnumber").toString()),
                       ],
                     ),
@@ -229,16 +218,12 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                       indent: 0.0,         // Left indent
                       endIndent: 0.0,      // Right indent
                     ),
-                    const SpaceBox(
-                      height: 20,
-                    ),
+                    CustomHelper.verticalSpace(20),
                     Text(
                       Commontext.sourcecode,
                       style: Stylefile.Text_black_16_heading_h6_robo_med,
                     ),
-                    const SpaceBox(
-                      height: 10,
-                    ),
+                    CustomHelper.verticalSpace(10),
                     Row(
                       children: [
                         //Icon(Icons.sourcecodeicon),
@@ -250,9 +235,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                             scale: .2,
                           ),
                         ),
-                        const SpaceBox(
-                          width: 10,
-                        ),
+                        CustomHelper.horizontalSpace(10),
 
                         Text(box.read("securecode").toString()),
                       ],
@@ -264,16 +247,12 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                       indent: 0.0,         // Left indent
                       endIndent: 0.0,      // Right indent
                     ),
-                    const SpaceBox(
-                      height: 20,
-                    ),
+                    CustomHelper.verticalSpace(20),
                     Text(
                       Commontext.mobilenumber,
                       style: Stylefile.Text_black_16_heading_h6_robo_med,
                     ),
-                    const SpaceBox(
-                      height: 10,
-                    ),
+                    CustomHelper.verticalSpace(10),
                     Row(
                       children: [
                         SizedBox(
@@ -284,12 +263,8 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                             scale: .2,
                           ),
                         ),
-                        const SpaceBox(
-                          height: 5,
-                        ),
-                        const SpaceBox(
-                          width: 10,
-                        ),
+                        CustomHelper.verticalSpace(5),
+                        CustomHelper.horizontalSpace(10),
                         Text(box.read("mobilenumber").toString()),
                       ],
                     ),
@@ -300,9 +275,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                       indent: 0.0,         // Left indent
                       endIndent: 0.0,      // Right indent
                     ),
-                    const SpaceBox(
-                      height: 10,
-                    ),
+                    CustomHelper.verticalSpace(10),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,11 +284,11 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: CheckboxListTile(
-                              contentPadding: EdgeInsets.all(0),
+                              contentPadding: const EdgeInsets.all(0),
                               controlAffinity: ListTileControlAffinity.leading,
 
                               title: Transform.translate(
-                                offset: Offset(-10, 0),
+                                offset: const Offset(-10, 0),
                                 child: Text(
                                   Commontext.iherebythat,
                                   style: Stylefile.Text_black_14_heading_h6_robo_med,
@@ -345,9 +318,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                           ),
                       ],
                     ),
-                    const SpaceBox(
-                      height: 20,
-                    ),
+                    CustomHelper.verticalSpace(20),
                     Center(
                         child: CustomElevatedButton(
                             label: Commontext.submit,
@@ -382,9 +353,7 @@ class _DetailsScreeenState extends State<PreviewDetailsScreeen> {
                                 }
                               }
                             })),
-                    const SpaceBox(
-                      height: 20,
-                    ),
+                    CustomHelper.verticalSpace(20),
                   ],
                 ),
               )

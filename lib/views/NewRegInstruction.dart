@@ -5,9 +5,9 @@ import 'package:cscapp/common/TextStyle.dart';
 import 'package:cscapp/views/Completeregistration.dart';
 import 'package:flutter/material.dart';
 import '../customwidgets/CustomElevatedButton.dart';
+import '../customwidgets/CustomHelper.dart';
 import '../customwidgets/RoundedContainer.dart';
-import '../customwidgets/SpaceBox.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class Newreginstruction extends StatefulWidget {
@@ -34,7 +34,8 @@ class _NewreginstructionState extends State<Newreginstruction> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SpaceBox(height: 40),
+
+              CustomHelper.verticalSpace(40),
               Row(
                 children: [
                   GestureDetector(
@@ -46,40 +47,30 @@ class _NewreginstructionState extends State<Newreginstruction> {
                       scale: .8,
                     ),
                   ),
-                  const SpaceBox(
-                    width: 20,
-                  ),
+                  CustomHelper.horizontalSpace(20),
                   Text(
                     Commontext.newregistrationheading,
                     style: Stylefile.Textcolor_blue_20,
                   ),
                 ],
               ),
-              const SpaceBox(
-                height: 30,
-              ),
+              CustomHelper.verticalSpace(30),
               const Text(
                 "Instructions",
                 style: Stylefile.Textcolor_blue_17_h2,
               ),
-              const SpaceBox(
-                height: 10,
-              ),
+              CustomHelper.verticalSpace(10),
               Text(
                 Commontext.instruction_heading,
                 style: Stylefile.Textcolor_blue_17_h2,
               ),
-              const SpaceBox(
-                height: 25,
-              ),
+              CustomHelper.verticalSpace(25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const RoundedContainer(),
-                  const SpaceBox(
-                    width: 14,
-                  ),
+                  CustomHelper.horizontalSpace(15),
                   Flexible(
                     child: RichText(
                       textAlign: TextAlign.start,
@@ -116,18 +107,12 @@ class _NewreginstructionState extends State<Newreginstruction> {
                   ),
                 ],
               ),
-              const SpaceBox(
-                height: 15,
-              ),
+              CustomHelper.verticalSpace(15),
               Row(
                 children: [
                   const RoundedContainer(),
-                  const SpaceBox(
-                    width: 14,
-                  ),
-                  const SpaceBox(
-                    height: 15,
-                  ),
+                  CustomHelper.horizontalSpace(15),
+                  CustomHelper.verticalSpace(15),
                   Flexible(
                     child: Text(
                       Commontext.devicelocation,
@@ -136,17 +121,13 @@ class _NewreginstructionState extends State<Newreginstruction> {
                   )
                 ],
               ),
-              const SpaceBox(
-                height: 15,
-              ),
+              CustomHelper.verticalSpace(15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const RoundedContainer(),
-                  const SpaceBox(
-                    width: 14,
-                  ),
+                  CustomHelper.horizontalSpace(15),
                   Flexible(
                     child: RichText(
                       textAlign: TextAlign.start,
@@ -178,9 +159,7 @@ class _NewreginstructionState extends State<Newreginstruction> {
                   ),
                 ],
               ),
-              const SpaceBox(
-                height: 40,
-              ),
+              CustomHelper.verticalSpace(40),
               Center(
                 child: CustomElevatedButton(
                   label: Commontext.proceed,

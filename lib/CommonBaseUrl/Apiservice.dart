@@ -14,9 +14,8 @@ import '../customwidgets/CustomHelper.dart';
 class Apiservice {
   static var resMsg;
 
-  //static String baseurl = "https://cscregister.csccloud.in/"; // this is production main url
-  static String baseurl =
-      "http://payuat.csccloud.in/registration/"; // this is UAT url
+  static String baseurl = "https://cscregister.csccloud.in/"; // this is production main url
+ // static String baseurl = "http://payuat.csccloud.in/registration/"; // this is UAT url
   static String fileupload_endpoint = '${baseurl}reg/upload';
   static String regmobile_api = "${baseurl}reg/mobile";
 

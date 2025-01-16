@@ -10,8 +10,7 @@ import '../common/CommonText.dart';
 import '../common/TextStyle.dart';
 import '../customwidgets/CustomElevatedButton.dart';
 import '../customwidgets/CustomHelper.dart';
-import '../customwidgets/SpaceBox.dart';
-import 'package:get_storage/get_storage.dart';
+ import 'package:get_storage/get_storage.dart';
 import 'PreviousScreen.dart';
 
 
@@ -205,7 +204,8 @@ class _CompleteregistrationState extends State<Completeregistration> {
                         height: MediaQuery.of(context).size.height * 0.9,
                         child: Column(
                           children: [
-                            const SpaceBox(height: 30),
+
+                            CustomHelper.verticalSpace(30),
                             Row(
                               children: [
                                 GestureDetector(
@@ -510,7 +510,8 @@ class _CompleteregistrationState extends State<Completeregistration> {
                     },
                   ),
                 ),
-                SpaceBox(width: 20,),
+
+                CustomHelper.horizontalSpace(20),
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(

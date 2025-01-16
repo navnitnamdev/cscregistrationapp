@@ -51,11 +51,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
-  void _navigateToHomeScreen() {
-    Future.delayed(const Duration(seconds: 2), () {
-      Get.offAll(const SignupButton());
-    });
-  }
+
 
   @override
   void initState() {
@@ -80,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen>
       }
     });
     Future.delayed(const Duration(seconds: 5), () {
-      Get.offAll(const SignupButton());
+      Get.off(const SignupButton());
     });
 
     super.initState();

@@ -19,8 +19,6 @@ class CustomHelper {
       fontSize: 16.0,
     );
   }
-
-  /// Displays a Snackbar message
   static void showScaffoldMessage(BuildContext context, String message,
       {Duration duration = const Duration(seconds: 2)}) {
     final snackBar = SnackBar(
@@ -113,7 +111,6 @@ class CustomHelper {
     );
   }
 
-  /// Displays an Exit Confirmation Dialog
   static Future<bool> showExitPopup({
     required BuildContext context,
     String title = "Exit App",
@@ -189,11 +186,11 @@ class CustomHelper {
                           ),
                         ),
                         onPressed: () {
-                          exit(0); // Exit the app
+                          exit(0);
                         },
                       ),
                     ),
-                    const SizedBox(width: 20), // Space between buttons
+                    const SizedBox(width: 20),
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -212,7 +209,7 @@ class CustomHelper {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pop(false); // Close dialog
+                          Navigator.of(context).pop(false);
                         },
                       ),
                     ),
@@ -225,8 +222,7 @@ class CustomHelper {
         false;
   }
 
-  /// Returns a custom Divider widget with customizable color and thickness
-  static Widget customDivider({
+   static Widget customDivider({
     Color color = Colors.grey,
     double thickness = 1.0,
     double indent = 0.0,
@@ -252,22 +248,22 @@ class CustomHelper {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          // बैकग्राउंड रंग
+
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0), // बॉक्स के कोने गोल
+            borderRadius: BorderRadius.circular(10.0),
           ),
           title: Text(
-            "Alert", // शीर्षक
+            "Alert",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.blue, // शीर्षक रंग
+              color: Colors.blue,
             ),
           ),
           content: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              message, // उपयोगकर्ता द्वारा दिया गया संदेश
+              message,
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -276,7 +272,7 @@ class CustomHelper {
               onPressed: () {
                 Navigator.of(context).pop();
                 showToast(context,
-                    message);// डायलॉग बंद करने के लिए
+                    message);
               },
               child: Text(
                 "OK",
@@ -287,5 +283,12 @@ class CustomHelper {
         );
       },
     );
+  }
+  static SizedBox verticalSpace(double height) {
+    return SizedBox(height: height);
+  }
+
+   static SizedBox horizontalSpace(double width) {
+    return SizedBox(width: width);
   }
 }

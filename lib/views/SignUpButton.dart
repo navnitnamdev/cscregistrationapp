@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:cscapp/common/CommonAppColor.dart';
 import 'package:cscapp/customwidgets/CustomHelper.dart';
-import 'package:cscapp/customwidgets/SpaceBox.dart';
 import 'package:cscapp/views/NewRegInstruction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -289,9 +288,7 @@ class _SignupState extends State<SignupButton> {
                             scale: .8,
                             fit: BoxFit.cover,
                           )),
-                      const SpaceBox(
-                        height: 40,
-                      ),
+                      CustomHelper.verticalSpace(40),
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 30, right: 30, bottom: 20),
@@ -303,9 +300,7 @@ class _SignupState extends State<SignupButton> {
                           ),
                         ),
                       ),
-                      const SpaceBox(
-                        height: 10,
-                      ),
+                      CustomHelper.verticalSpace(10),
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 30, right: 30, bottom: 20),
@@ -317,9 +312,7 @@ class _SignupState extends State<SignupButton> {
                           ),
                         ),
                       ),
-                      const SpaceBox(
-                        height: 30,
-                      ),
+                      CustomHelper.verticalSpace(30),
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 30, right: 30, bottom: 20),
@@ -327,17 +320,15 @@ class _SignupState extends State<SignupButton> {
                           child: CustomElevatedButton(
                             label: Commontext.signup,
                             onPressed: () async {
-                             //  Navigatemethod();
-                              onSubmit(context);
+                              Navigatemethod();
+                            //  onSubmit(context);
 
 
                             },
                           ),
                         ),
                       ),
-                      const SpaceBox(
-                        height: 100,
-                      ),
+                      CustomHelper.verticalSpace(100),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -439,9 +430,7 @@ class _SignupState extends State<SignupButton> {
                         },
                       ),
                     ),
-                    const SpaceBox(
-                      width: 20,
-                    ),
+                    CustomHelper.horizontalSpace(20),
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(

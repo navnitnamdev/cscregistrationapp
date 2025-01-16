@@ -16,7 +16,6 @@ import '../../common/AppImagesPath.dart';
 import '../../common/CommonText.dart';
 import '../../common/TextStyle.dart';
 import '../../customwidgets/RoundedContainer.dart';
-import '../../customwidgets/SpaceBox.dart';
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -91,7 +90,7 @@ class PreviousscreenState extends State<Previousscreen> {
   void fetchLocation() async {
     await Permission.camera.request();
     await Permission.microphone.request();
-     await Permission.location.request();
+    await Permission.location.request();
   }
 
   @override
@@ -233,7 +232,7 @@ class PreviousscreenState extends State<Previousscreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SpaceBox(height: 30),
+                    CustomHelper.verticalSpace(30),
                     Row(
                       children: [
                         GestureDetector(
@@ -245,9 +244,7 @@ class PreviousscreenState extends State<Previousscreen> {
                             scale: .8,
                           ),
                         ),
-                        const SpaceBox(
-                          width: 20,
-                        ),
+                        CustomHelper.horizontalSpace(20),
                         Text(
                           Commontext.capturevideo,
                           style: Stylefile.Textcolor_blue_20,
@@ -261,17 +258,13 @@ class PreviousscreenState extends State<Previousscreen> {
                       "Instructions",
                       style: Stylefile.Textcolor_blue_17_h2,
                     ),
-                    const SpaceBox(
-                      height: 25,
-                    ),
+                    CustomHelper.verticalSpace(25),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const RoundedContainer(),
-                        const SpaceBox(
-                          width: 14,
-                        ),
+                        CustomHelper.verticalSpace(14),
                         Flexible(
                           child: Text(
                             Commontext.capturevideogeotagged,
@@ -280,18 +273,12 @@ class PreviousscreenState extends State<Previousscreen> {
                         )
                       ],
                     ),
-                    const SpaceBox(
-                      height: 15,
-                    ),
+                    CustomHelper.verticalSpace(15),
                     Row(
                       children: [
                         const RoundedContainer(),
-                        const SpaceBox(
-                          width: 14,
-                        ),
-                        const SpaceBox(
-                          height: 15,
-                        ),
+                        CustomHelper.horizontalSpace(14),
+                        CustomHelper.verticalSpace(15),
                         Flexible(
                           child: Text(
                             Commontext.videoshouldbe,
@@ -300,17 +287,13 @@ class PreviousscreenState extends State<Previousscreen> {
                         )
                       ],
                     ),
-                    const SpaceBox(
-                      height: 15,
-                    ),
+                    CustomHelper.verticalSpace(15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const RoundedContainer(),
-                        const SpaceBox(
-                          width: 14,
-                        ),
+                        CustomHelper.horizontalSpace(14),
                         Flexible(
                           child: RichText(
                             textAlign: TextAlign.start,
@@ -352,17 +335,13 @@ class PreviousscreenState extends State<Previousscreen> {
                         ),
                       ],
                     ),
-                    const SpaceBox(
-                      height: 15,
-                    ),
+                    CustomHelper.verticalSpace(15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const RoundedContainer(),
-                        const SpaceBox(
-                          width: 14,
-                        ),
+                        CustomHelper.horizontalSpace(14),
                         Flexible(
                           child: RichText(
                             textAlign: TextAlign.start,
@@ -399,16 +378,12 @@ class PreviousscreenState extends State<Previousscreen> {
                         ),
                       ],
                     ),
-                    const SpaceBox(
-                      height: 15,
-                    ),
+                    CustomHelper.verticalSpace(15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SpaceBox(
-                          width: 14,
-                        ),
+                        CustomHelper.horizontalSpace(14),
                         Flexible(
                           child: RichText(
                             textAlign: TextAlign.start,
@@ -440,9 +415,7 @@ class PreviousscreenState extends State<Previousscreen> {
                         ),
                       ],
                     ),
-                    const SpaceBox(
-                      height: 10,
-                    ),
+                    CustomHelper.verticalSpace(10)
                   ],
                 ),
               ),
@@ -450,9 +423,6 @@ class PreviousscreenState extends State<Previousscreen> {
             if (_videoPath == null)
               GestureDetector(
                 onTap: () async {
-                  CustomHelper.showToast(
-                      context, "Please allow all permissions");
-
                   var cameraStatus = await Permission.camera.status;
                   if (cameraStatus.isDenied) {
                     cameraStatus = await Permission.camera.request();
@@ -481,7 +451,8 @@ class PreviousscreenState extends State<Previousscreen> {
                   if (cameraStatus.isGranted == false ||
                       microphoneStatus.isGranted == false ||
                       locationStatus.isGranted == false) {
-                    showDialog(
+                    showDialog
+                      (
                       context: context,
                       builder: (context) => AlertDialog(
                         backgroundColor: Commonappcolor.white,
@@ -495,8 +466,9 @@ class PreviousscreenState extends State<Previousscreen> {
                             ),
                           ),
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 5),
+                        //contentPadding: EdgeInsets.symmetric(horizontal: 5),
                         title: Container(
+
                             color: Colors.blue,
                             child: const Center(
                               child: Padding(
@@ -513,23 +485,16 @@ class PreviousscreenState extends State<Previousscreen> {
                                 ),
                               ),
                             )),
-                        content: RichText(
-                            text: TextSpan(children: [
-                          TextSpan(
-                            text:
-                                "\nPlease allow permissions to access camera, location and microphone :-\n ",
-                            style: Stylefile.Textcolor_black_16_heading_h4,
+                        content: SizedBox(
+                          height: 130,
+                          child: Center(
+                            child: Text("Please allow permissions to access :-\nCamera\nLocation\nMicrophone\n ",
+                              style: Stylefile.Textcolor_black_16_heading_h4,),
                           ),
-                          TextSpan(
-                            text:
-                                "\n$cameraMessage\n$microphoneMessage\n$locationMessage",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ])),
+                        ),
+
                         actions: [
-                          SizedBox(
-                            height: 10,
-                          ),
+
                           Center(
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -546,8 +511,10 @@ class PreviousscreenState extends State<Previousscreen> {
                                   child: Center(
                                       child: Text(
                                     "OK",
-                                    style: Stylefile
-                                        .Text_white_20_heading_h6_robo_bold,
+                                         style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Commonappcolor.white),
                                   ))),
                             ),
                           ),
@@ -785,9 +752,7 @@ class PreviousscreenState extends State<Previousscreen> {
                             },
                           ),
                         ),
-                        const SpaceBox(
-                          width: 5,
-                        ),
+                        CustomHelper.horizontalSpace(5),
                         Expanded(
                           child: CustomElevatedButton(
                             label: Commontext.proceedtoreview,
