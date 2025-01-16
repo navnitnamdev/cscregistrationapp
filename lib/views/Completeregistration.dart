@@ -221,8 +221,7 @@ class _CompleteregistrationState extends State<Completeregistration> {
                                 Flexible(
                                   child: Text(
                                     Commontext.completeregistration,
-                                    /*  style: Stylefile.Textcolor_blue_30,
-                                  overflow: TextOverflow.ellipsis,*/
+
                                     style: Stylefile.Textcolor_blue_20,
                                   ),
                                 ),
